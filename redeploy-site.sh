@@ -6,11 +6,10 @@ cd logan-portfolio
 
 git fetch && git reset origin/main --hard
 
-python3 -m venv python3-virtualenv
 source python3-virtualenv/bin/activate
 pip3 install -r requirements.txt
 
-tmux new -s portfolio -d 
+tmux new -s portfolio -d
 tmux send-keys -t portfolio "cd logan-portfolio" Enter
 tmux send-keys -t portfolio "source python3-virtualenv/bin/activate" Enter
-tmux send-keys -t portfolio "flask run --host=0.0.0.0"
+tmux send-keys -t portfolio "flask run --host=0.0.0.0" Enter
