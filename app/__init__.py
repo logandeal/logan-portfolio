@@ -76,9 +76,29 @@ def get_time_line_post():
         'timeline_posts': [
             model_to_dict(p)
             for p in
-TimelinePost.select().order_by(TimelinePost.created_at.desk())
+TimelinePost.select().order_by(TimelinePost.created_at.desc())
         ]
     }
 
+@app.route('/api/timeline_post/<int:post_id>', methods=['GET'])
+def get_time_line_post_by_id(post_id):
+    return model_to_dict(
+      TimelinePost.select().where(TimelinePost.id == post_id)[0]
+    )
+
+@app.route('/api/timeline_post/<int:post_id>', methods=['DELETE'])
+def delete_time_line_post_by_id(post_id):
+    TimelinePost.delete_by_id(post_id)
+    return "deleted post " + post_id
+
+#@app.route('/api/timeline_post', methods=['DELETE'])
+#def delete_time_line():
+#        model_to_dict(p)
+#        for p in
+#    TimelinePost.delete_by_id()
+#        ]
+#    }
+
 if __name__ ==  "__main__":
     app.run()
+
