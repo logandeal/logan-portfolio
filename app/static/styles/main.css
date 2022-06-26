@@ -18,6 +18,32 @@ body {
   margin: 0px;
 }
 
+#form {
+  margin: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+label {
+  margin: 10px;
+}
+
+button {
+  margin: 10px;
+}
+
+.gravatar {
+  width: 40px;
+  border-radius: 20px;
+}
+
+.posts {
+  margin: 10px;
+}
+
 .mainText {
   margin: 10px;
   min-height: calc(100vh - 201px);

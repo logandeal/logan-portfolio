@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Hobbies</title>
+  </head>
+
+  {% extends 'base.html' %} {% block content %}
+  <body>
+    <form id="form">
+      <label for="name">Name:</label>
+      <input id="name" name="name" type="text" required />
+      <label for="email"> Email:</label>
+      <input id="email" name="email" type="text" required />
+      <label for="content"> Message:</label>
+      <input id="content" name="content" type="text" required />
+      <button type="submit">Submit</button>
+    </form>
+    <div class="posts">
+      {% for post in timeline %}
+      <div class="post">
+        <p>
+          <img class="gravatar" src="{{post.pic_url}}">
+          <b>{{post.id}}</b> {{post.created_at}} {{post.name}} {{post.email}}
+          <br />
+          {{post.content}}
+          <hr>
+        </p>
+      </div>
+      {% endfor %}
+    </div>
+  </body>
+  <script>
+    const form = document.getElementById("form");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const prePayload = new FormData(form);
+      const payload = new URLSearchParams(prePayload);
+
+      console.log([...payload]);
+
+      fetch("/api/timeline_post", {
+        method: "POST",
+        body: payload,
+      })
+        .then((res) => res.json())
+        .then((data) => console.log(data))
+        .then(() => {
+          location.reload();
+        })
+        .catch((err) => console.log(err));
+    });
+  </script>
+  {% endblock %}
+</html>
