@@ -4,7 +4,11 @@ from dotenv import load_dotenv
 from peewee import *
 import datetime as dt
 from playhouse.shortcuts import model_to_dict
-from libgravatar import Gravatar
+from libgravatar import Gravatar #
+
+if os.getenv("TESTING") == "true":
+    print("Running in test mode")
+    mydb = SqliteDatabase('file:memory?mode=memory&cache=shared', uri=True)
 
 mydb = MySQLDatabase(os.getenv("MYSQL_DATABASE"),
     user=os.getenv("MYSQL_USER"),
@@ -20,7 +24,7 @@ class TimelinePost(Model):
     email = CharField()
     content = TextField()
     created_at = DateTimeField(default=dt.datetime.now)
-    pic_url = TextField()
+    pic_url = TextField() #
 
     class Meta:
         database = mydb
@@ -72,9 +76,9 @@ def post_time_line_post():
     name = request.form['name']
     email = request.form['email']
     content = request.form['content']
-    g = Gravatar(email)
-    gravatar_url = g.get_image()
-    timeline_post = TimelinePost.create(name=name, email=email, content=content, pic_url=gravatar_url)
+    g = Gravatar(email) #
+    gravatar_url = g.get_image() #
+    timeline_post = TimelinePost.create(name=name, email=email, content=content, pic_url=gravatar_url) #
 
     return model_to_dict(timeline_post)
 
