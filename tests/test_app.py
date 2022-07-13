@@ -5,10 +5,10 @@ os.environ['TESTING'] = 'true'
 from app import app
 
 class AppTestCase(unittest.TestCase):
-    def _1setUp(self):
+    def setUp(self):
         self.client = app.test_client()
 
-    def _2test_home(self):
+    def test_1_home(self):
         response = self.client.get("/")
         assert response.status_code == 200
         html = response.get_data(as_text=True)
@@ -17,7 +17,7 @@ class AppTestCase(unittest.TestCase):
         assert "<a href=\"/loganswork/\" class=\"homeLink\">" in html
 
     
-    def _3test_empty_timeline(self):
+    def test_2_empty_timeline(self):
         response = self.client.get("api/timeline_post")
         assert response.status_code == 200
         assert response.is_json
@@ -25,7 +25,7 @@ class AppTestCase(unittest.TestCase):
         assert "timeline_posts" in json
         assert len(json["timeline_posts"]) == 0
 
-    def _4test_timeline(self):
+    def test_3_timeline(self):
         get_response = self.client.get("api/timeline_post")
         assert get_response.status_code == 200
         assert get_response.is_json
@@ -40,7 +40,7 @@ class AppTestCase(unittest.TestCase):
         assert first_post['name'] == "John Doe"
         # assert "John Doe" and "john@example.com" and "Hello world, I'm John!" in json
 
-    def _5test_malformed_timeline_post(self):
+    def test_4_malformed_timeline_post(self):
         response = self.client.post("/api/timeline_post", data={"email": "john@example.com", "content": "Hello world, I'm John!"})
         assert response.status_code == 400
         html = response.get_data(as_text=True)
