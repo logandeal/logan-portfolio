@@ -18,9 +18,9 @@ class TestTimelinePost(unittest.TestCase):
         test_db.close()
     
     def test_timeline_post(self):
-        first_post = TimelinePost.create(name='John Doe', email='john@example.com', content='hello world, I\'m John!')
+        first_post = TimelinePost.create(name='John Doe', email='john@example.com', content='hello world, I\'m John!', pic_url='')
         assert first_post.id == 1
-        second_post = TimelinePost.create(name='Jane Doe', email='jane@example.com', content='hello world, I\'m Jane!')
+        second_post = TimelinePost.create(name='Jane Doe', email='jane@example.com', content='hello world, I\'m Jane!', pic_url='')
         assert second_post.id == 2
         
 
