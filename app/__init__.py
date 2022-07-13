@@ -27,7 +27,7 @@ class TimelinePost(Model):
     email = CharField()
     content = TextField()
     created_at = DateTimeField(default=dt.datetime.now)
-    #pic_url = TextField()
+    pic_url = TextField()
 
     class Meta:
         database = mydb
@@ -78,9 +78,9 @@ def post_time_line_post():
     name = request.form['name']
     email = request.form['email']
     content = request.form['content']
-    #g = Gravatar(email)
-    #gravatar_url = g.get_image()
-    timeline_post = TimelinePost.create(name=name, email=email, content=content) #, pic_url=gravatar_url
+    g = Gravatar(email)
+    gravatar_url = g.get_image()
+    timeline_post = TimelinePost.create(name=name, email=email, content=content, pic_url=gravatar_url)
 
     return model_to_dict(timeline_post)
 
@@ -105,7 +105,7 @@ def delete_time_line_post_by_id(post_id):
     TimelinePost.delete_by_id(post_id)
     return "deleted post " + post_id
 
-#@app.route('/api/timeline_post', methods=['DELETE'])
+@app.route('/api/timeline_post', methods=['DELETE'])
 #def delete_time_line():
 #        model_to_dict(p)
 #        for p in
