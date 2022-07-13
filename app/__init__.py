@@ -105,7 +105,7 @@ def delete_time_line_post_by_id(post_id):
     TimelinePost.delete_by_id(post_id)
     return "deleted post " + post_id
 
-@app.route('/api/timeline_post', methods=['DELETE'])
+#@app.route('/api/timeline_post', methods=['DELETE'])
 #def delete_time_line():
 #        model_to_dict(p)
 #        for p in
