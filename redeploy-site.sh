@@ -4,10 +4,7 @@ cd logan-portfolio
 
 git fetch && git reset origin/main --hard
 
-source python3-virtualenv/bin/activate
-pip3 install -r requirements.txt
-
-systemctl daemon-reload
-systemctl restart myportfolio
+docker compose -f docker-compose.prod.yml down
+docker compose -f docker-compose.prod.yml -d --build
 
 chmod +x redeploy-site.sh

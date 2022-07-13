@@ -4,10 +4,7 @@ from dotenv import load_dotenv
 from peewee import *
 import datetime as dt
 from playhouse.shortcuts import model_to_dict
-from libgravatar import Gravatar
-
-load_dotenv()
-app = Flask(__name__)
+from libgravatar import Gravatar #
 
 if os.getenv("TESTING") == "true":
     print("Running in test mode")
@@ -27,7 +24,7 @@ class TimelinePost(Model):
     email = CharField()
     content = TextField()
     created_at = DateTimeField(default=dt.datetime.now)
-    pic_url = TextField()
+    pic_url = TextField() #
 
     class Meta:
         database = mydb
@@ -35,7 +32,8 @@ class TimelinePost(Model):
 mydb.connect()
 mydb.create_tables([TimelinePost])
 
-
+load_dotenv()
+app = Flask(__name__)
 
 @app.route('/')
 def index():
@@ -98,11 +96,10 @@ def post_time_line_post():
             return "Invalid content", 400
     except KeyError as err:
         return "Invalid content", 400
-    
-    g = Gravatar(email)
-    gravatar_url = g.get_image()
-    timeline_post = TimelinePost.create(name=name, email=email, content=content, pic_url=gravatar_url)
 
+    g = Gravatar(email) #
+    gravatar_url = g.get_image() #
+    timeline_post = TimelinePost.create(name=name, email=email, content=content, pic_url=gravatar_url) #
     return model_to_dict(timeline_post)
 
 @app.route('/api/timeline_post', methods=['GET'])
