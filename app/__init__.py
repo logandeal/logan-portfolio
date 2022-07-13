@@ -73,19 +73,33 @@ def timeline():
 
 @app.route('/api/timeline_post', methods=['POST'])
 def post_time_line_post():
-    name = request.form['name']
-    # if len(name) < 1:
-    #     return 'Invalid name', 400
-    email = request.form['email']
-    # if "@" not in email:
-    #     return 'Invalid content', 400
-    content = request.form['content']
-    # if len(content) < 1:
-    #     return 'Invalid email', 400
+    # Validate name
+    try:
+        name = request.form['name']
+        if len(name) < 1:
+            return "Invalid content", 400
+    except KeyError as err:
+        return "Invalid name", 400
+
+    # Validate email
+    try:
+        email = request.form['email']
+        if "@" not in email:
+            return "Invalid email", 400
+    except KeyError as err:
+        return "Invalid email", 400
+
+    # Validate content
+    try:
+        content = request.form['content']
+        if len(content) < 1:
+            return "Invalid content", 400
+    except KeyError as err:
+        return "Invalid content", 400
+
     g = Gravatar(email) #
     gravatar_url = g.get_image() #
     timeline_post = TimelinePost.create(name=name, email=email, content=content, pic_url=gravatar_url) #
-
     return model_to_dict(timeline_post)
 
 @app.route('/api/timeline_post', methods=['GET'])
