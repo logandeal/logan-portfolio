@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd logan-portfolio
+cd ~/logan-portfolio
 
 git fetch && git reset origin/main --hard
 
