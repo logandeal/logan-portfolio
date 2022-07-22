@@ -6,6 +6,8 @@ import datetime as dt
 from playhouse.shortcuts import model_to_dict
 from libgravatar import Gravatar #
 
+# os.environ['TESTING'] = 'true'
+
 if os.getenv("TESTING") == "true":
     print("Running in test mode")
     mydb = SqliteDatabase('file:memory?mode=memory&cache=shared', uri=True)
