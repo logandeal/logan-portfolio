@@ -30,3 +30,9 @@ jobs:
 
       - name: Deploy site
         run: ssh my-vps '~/logan-portfolio/redeploy-site.sh'
+
+      - name: Print container status
+        run: |
+          ssh my-vps 
+          cd ~/logan-portfolio
+          docker compose ps
