@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker compose ps
+docker compose -f docker-compose.prod.yml ps
