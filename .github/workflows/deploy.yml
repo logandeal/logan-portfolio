@@ -34,5 +34,5 @@ jobs:
       - name: Print container status
         run: |
           ssh my-vps 
-          cd ~/logan-portfolio
+          cd logan-portfolio
           docker compose ps
