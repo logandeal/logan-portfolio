@@ -32,6 +32,4 @@ jobs:
         run: ssh my-vps '~/logan-portfolio/redeploy-site.sh'
 
       - name: Print container status
-        run: |
-          ssh my-vps
-          docker compose ps
+        run: ssh my-vps '~/logan-portfolio/container-status.sh'
