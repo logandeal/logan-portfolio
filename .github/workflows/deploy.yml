@@ -34,3 +34,4 @@ jobs:
       - name: Print container status
         run: |
           ssh my-vps
+          pwd
